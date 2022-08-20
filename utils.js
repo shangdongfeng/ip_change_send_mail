@@ -37,8 +37,7 @@ class OSUtil {
             const iface = interfaces[devName];
             for (let i = 0; i < iface.length; i++) {
                 let alias = iface[i];
-                //console.log(alias)
-                if (alias.family === 'IPv6' && alias.address !== '::1' && !alias.internal && !alias.address.startsWith("fe")) {
+                if (alias.family === 'IPv6' && alias.address.startsWith("2409")) {
                     return alias.address;
                 }
             }

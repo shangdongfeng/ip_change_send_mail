@@ -1,13 +1,17 @@
 const fs = require("fs");
+const path = require('path');
 const { OSUtil, sendEmail, sleep } = require('./utils');
 
+const LOCAL_IPTXT = path.resolve(__dirname, "./localIp.txt");
+const LOCAL_LOGS = path.resolve(__dirname, './iplogs.txt');
+
 const readLocalIp = () => {
-    const _ip = fs.readFileSync('./localIp.txt');
+    const _ip = fs.readFileSync(LOCAL_IPTXT);
     return _ip.toString();
 }
 
 const writeIp = (ip) => {
-    fs.writeFileSync('./localIp.txt', ip);
+    fs.writeFileSync(LOCAL_IPTXT, ip);
 }
 
 const appendFile = (ip) => {
@@ -17,7 +21,7 @@ const appendFile = (ip) => {
     const day = _date.getDate();
     const hour = _date.getHours(); 
     const minute = _date.getMinutes();
-    fs.appendFileSync('./iplogs.txt', `时间：${year}-${month}-${day} ${hour}:${minute}    ip: ${ip} \n`);
+    fs.appendFileSync(LOCAL_LOGS, `时间：${year}-${month}-${day} ${hour}:${minute}    ip: ${ip} \n`);
 }
 
 let preIpv6 = readLocalIp();
